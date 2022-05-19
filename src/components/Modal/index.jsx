@@ -11,10 +11,25 @@ import TextField from "@mui/material/TextField";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import CategoryList from "../CategoryList";
+import api from "../../api";
 
 const Modal = () => {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  async function getData() {
+    try {
+      const response = await api.get("/data");
+      if (response) {
+        setData(response.data);
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -22,6 +37,10 @@ const Modal = () => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const searchQuery = (query) => {
+    setQuery(query);
   };
 
   return (
@@ -44,8 +63,8 @@ const Modal = () => {
           </AppBar>
           <CssBaseline />
           <Container maxWidth='sm'>
-            <TextField sx={{ margin: "2rem 0", width: "100%" }} value={query} onChange={(event) => setQuery(event.target.value)} id='outlined-search' label='Machine Name' type='search' />
-            <CategoryList />
+            <TextField sx={{ margin: "2rem 0", width: "100%" }} value={query} onChange={(event) => searchQuery(event.target.value)} id='outlined-search' label='Machine Name' type='search' />
+            <CategoryList data={data} loading={loading} getData={getData} />
           </Container>
         </Dialog>
       </Box>
