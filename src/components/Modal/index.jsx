@@ -11,25 +11,12 @@ import TextField from "@mui/material/TextField";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import CategoryList from "../CategoryList";
-import api from "../../api";
+import useFetch from "../../hooks/useFetch";
 
 const Modal = () => {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  async function getData() {
-    try {
-      const response = await api.get("/data");
-      if (response) {
-        setData(response.data);
-        setLoading(false);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  const { data, loading, getData } = useFetch("/data");
 
   const handleClickOpen = () => {
     setOpen(true);
