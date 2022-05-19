@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import List from "@mui/material/List";
 import CategoryItem from "./CategoryItem";
 
-const CategoryList = ({ data, loading, getData }) => {
+const CategoryList = ({ data, query, loading, getData }) => {
+  
   useEffect(() => {
     getData();
   }, []);
@@ -20,7 +21,7 @@ const CategoryList = ({ data, loading, getData }) => {
         }}
         subheader={<li />}>
         {loading && <p>Loading...</p>}
-        {data && data.map((group, index) => <CategoryItem group={group} key={group.groupId} index={index} />)}
+        {data && data.filter((group) => group.name.toLowerCase().includes(query.toLowerCase())).map((group, index) => <CategoryItem group={group} query={query} key={group.groupId} index={index} />)}
       </List>
     </>
   );

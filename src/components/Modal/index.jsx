@@ -39,10 +39,6 @@ const Modal = () => {
     setOpen(false);
   };
 
-  const searchQuery = (query) => {
-    setQuery(query);
-  };
-
   return (
     <>
       <Box sx={{ margin: "10rem auto", textAlign: "center" }}>
@@ -63,8 +59,8 @@ const Modal = () => {
           </AppBar>
           <CssBaseline />
           <Container maxWidth='sm'>
-            <TextField sx={{ margin: "2rem 0", width: "100%" }} value={query} onChange={(event) => searchQuery(event.target.value)} id='outlined-search' label='Machine Name' type='search' />
-            <CategoryList data={data} loading={loading} getData={getData} />
+            <TextField sx={{ margin: "2rem 0", width: "100%" }} value={query} onChange={(event) => setQuery(event.target.value)} id='outlined-search' label='Machine Name' type='search' />
+            <CategoryList data={data} query={query} loading={loading} getData={getData} />
           </Container>
         </Dialog>
       </Box>
