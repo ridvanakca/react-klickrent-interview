@@ -4,6 +4,7 @@ import CategoryItem from "./CategoryItem";
 
 const CategoryList = () => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const getData = () => {
     fetch("http://localhost:3004/data")
@@ -11,6 +12,7 @@ const CategoryList = () => {
       .then((data) => {
         if (data) {
           setData(data);
+          setLoading(false);
         }
       });
   };
@@ -31,6 +33,7 @@ const CategoryList = () => {
           "& ul": { padding: 0 },
         }}
         subheader={<li />}>
+        {loading && <p>Loading...</p>}
         {data && data.map((group, index) => <CategoryItem group={group} key={group.groupId} index={index} />)}
       </List>
     </>
