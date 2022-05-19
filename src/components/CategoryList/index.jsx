@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import ListItemText from "@mui/material/ListItemText";
-import ListItem from "@mui/material/ListItem";
 import List from "@mui/material/List";
-import ListSubheader from "@mui/material/ListSubheader";
+import CategoryItem from "./CategoryItem";
 
 const CategoryList = () => {
   const [data, setData] = useState([]);
@@ -12,7 +10,6 @@ const CategoryList = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data) {
-          console.log(data.map((datum) => datum.familyId));
           setData(data);
         }
       });
@@ -34,19 +31,7 @@ const CategoryList = () => {
           "& ul": { padding: 0 },
         }}
         subheader={<li />}>
-        {data &&
-          data.map((group) => (
-            <li key={`group-${group.groupId}`}>
-              <ul>
-                <ListSubheader style={{ padding: "0.5rem", fontSize: "2rem", fontWeight: "700", backgroundColor: "#F0F0F0", marginBottom: "0.8rem" }}>{`Category ${group.groupId}`}</ListSubheader>
-                {group.products.map((product) => (
-                  <ListItem key={`item-${product.typeId}`}>
-                    <ListItemText primary={product.name} />
-                  </ListItem>
-                ))}
-              </ul>
-            </li>
-          ))}
+        {data && data.map((group, index) => <CategoryItem group={group} key={group.groupId} index={index} />)}
       </List>
     </>
   );
