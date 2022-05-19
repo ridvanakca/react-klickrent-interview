@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from "react";
 import List from "@mui/material/List";
 import CategoryItem from "./CategoryItem";
+import api from "../../api";
 
 const CategoryList = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const getData = () => {
-    fetch("http://localhost:3004/data")
-      .then((response) => response.json())
-      .then((data) => {
-        if (data) {
-          setData(data);
-          setLoading(false);
-        }
-      });
-  };
+  async function getData() {
+    try {
+      const response = await api.get('/data');
+      if(response) {
+        setData(response.data);
+        setLoading(false);
+      }
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
     getData();
