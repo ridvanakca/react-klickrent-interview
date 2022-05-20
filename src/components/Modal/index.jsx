@@ -16,7 +16,7 @@ import useFetch from "../../hooks/useFetch";
 const Modal = () => {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const { data, loading, getData } = useFetch("/data");
+  const { data, loading, getData } = useFetch("/api");
 
   const handleClickOpen = () => {
     setOpen(true);

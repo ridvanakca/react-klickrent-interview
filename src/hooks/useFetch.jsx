@@ -9,7 +9,7 @@ const useFetch = (url) => {
     try {
       const response = await api.get(url);
       if (response) {
-        setData(response.data);
+        setData(response.data.machines);
         setLoading(false);
       }
     } catch (error) {

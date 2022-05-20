@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "http://localhost:3004";
+const baseURL = "https://machines-data.vercel.app";
 
 const api = axios.create({
   baseURL,
