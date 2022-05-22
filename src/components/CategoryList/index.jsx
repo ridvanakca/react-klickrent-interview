@@ -3,7 +3,6 @@ import List from "@mui/material/List";
 import CategoryItem from "./CategoryItem";
 
 const CategoryList = ({ data, query, loading, getData }) => {
-  
   useEffect(() => {
     getData();
   }, []);
@@ -16,7 +15,7 @@ const CategoryList = ({ data, query, loading, getData }) => {
           bgcolor: "background.paper",
           position: "relative",
           overflow: "auto",
-          maxHeight: 500,
+          maxHeight: "100vh",
           "& ul": { padding: 0 },
         }}
         subheader={<li />}>
