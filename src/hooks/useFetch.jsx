@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import api from "../api";
 
 const useFetch = (url) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  async function getData() {
+  const getData = async () => {
     try {
       const response = await api.get(url);
       if (response) {
@@ -15,9 +15,13 @@ const useFetch = (url) => {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
-  return { data, loading, getData };
+  useEffect(() => {
+    getData();
+  }, [url]);
+
+  return { data, loading };
 };
 
 export default useFetch;

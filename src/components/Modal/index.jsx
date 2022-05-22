@@ -11,12 +11,10 @@ import TextField from "@mui/material/TextField";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import CategoryList from "../CategoryList";
-import useFetch from "../../hooks/useFetch";
 
 const Modal = () => {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const { data, loading, getData } = useFetch("/api");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -30,7 +28,7 @@ const Modal = () => {
     <>
       <Box sx={{ margin: "10rem auto", textAlign: "center" }}>
         <Button variant='outlined' onClick={handleClickOpen}>
-          Open full-screen dialog
+          Start inquiry
         </Button>
 
         <Dialog fullScreen open={open} onClose={handleClose}>
@@ -47,7 +45,7 @@ const Modal = () => {
           <CssBaseline />
           <Container maxWidth='sm'>
             <TextField sx={{ margin: "2rem 0", width: "100%" }} value={query} onChange={(event) => setQuery(event.target.value)} id='outlined-search' label='Machine Name' type='search' />
-            <CategoryList data={data} query={query} loading={loading} getData={getData} />
+            <CategoryList query={query} />
           </Container>
         </Dialog>
       </Box>
